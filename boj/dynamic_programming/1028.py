@@ -14,7 +14,7 @@ for i in range(1, r):
             rd[i][j] = rd[i-1][j-1] + 1 if j > 0 else rd[i][j]
             ld[i][j] = ld[i-1][j+1] + 1 if j < c-1 else ld[i][j]
             t = min(rd[i][j], ld[i][j])
-            temp = max([a+1 for a in range(t) if rd[i-a][j+a] > a and ld[i-a][j-a] > a])
+            temp = max([a+1 for a in range(ans, t) if rd[i-a][j+a] > a and ld[i-a][j-a] > a] + [0]) if t > ans else 0
             ans = max(ans, temp)
 
 print(ans)
