@@ -18,7 +18,8 @@ while q: #큐가 빌 때까지
 
     for link_node in link_list[node]:
         #link_list는 node의 인접 노드 리스트를 관리하는 2차원 리스트라고 가정
-        q.append(link_node)
+        if not visited[link_node]:
+            q.append(link_node)
 ```
 재귀를 사용하지 않기 때문에 일반적으로 dfs 보다 성능이 좋은듯.  
 
