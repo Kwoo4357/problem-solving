@@ -10,8 +10,7 @@ int main(){
     for(i=0; i<n; i++) scanf("%d%d", &lines[i].first, &lines[i].second);
     sort(lines, lines+n);
 
-    i = -1;
-    while(++i<n){
+    for(i=0; i<n; i++){
         start = lines[i].first;
         end = lines[i].second;
 
