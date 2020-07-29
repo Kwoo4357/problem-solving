@@ -3,26 +3,24 @@ import sys
 from collections import deque
 
 input = sys.stdin.readline
+f = lambda x: int(x)-1
 
 n = int(input())
-near = [[]] + [list(map(int, input().split()[:-1])) for _ in range(n)]
+near = [list(map(f, input().split()[:-1])) for _ in range(n)]
 input()
-q = deque(list(map(int, input().split())))
-rumor = [[] for _ in range(n + 1)]
-ans = [-1]*(n+1)
-yet = [1]*(n+1)
+q = deque(list(map(f, input().split())))
 
+rumor = [0]*n
+ans = [-1]*n
 for a in q:
-    yet[a] = 0
     ans[a] = 0
 
 while q:
     i = q.popleft()
     for t in near[i]:
-        rumor[t].append(ans[i])
-        if yet[t] and len(rumor[t]) >= len(near[t])/2:
+        rumor[t] += 1
+        if ans[t] < 0 and rumor[t] >= len(near[t])/2:
             q.append(t)
-            yet[t] = 0
-            ans[t] = max(rumor[t]) + 1
+            ans[t] = ans[i]+1
 
-print(*ans[1:])
+print(*ans)
