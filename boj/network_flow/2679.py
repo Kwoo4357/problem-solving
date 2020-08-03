@@ -2,7 +2,7 @@
 from collections import deque
 
 for _ in range(int(input())):
-    n, e, a, b = map(int, input().split())
+    n, e, source, sink = map(int, input().split())
     capacity = [[0]*n for _ in range(n)]
     flow = [[0]*n for _ in range(n)]
     adj = [[] for _ in range(n)]
@@ -13,10 +13,7 @@ for _ in range(int(input())):
         adj[u].append(v)
         adj[v].append(u)
 
-    total = 0
-    max_route = 0
-    source = a
-    sink = b
+    total, max_route = 0, 0
 
     while 1:
         prev = [-1]*n
@@ -36,9 +33,9 @@ for _ in range(int(input())):
         if prev[sink] < 0:
             break
 
+        curr_flow, route_capacity = 9e9, 9e9
+
         i = sink
-        curr_flow = 9e9
-        route_capacity = 9e9
         while i != source:
             curr_flow = min(curr_flow, capacity[prev[i]][i]-flow[prev[i]][i])
             route_capacity = min(route_capacity, capacity[prev[i]][i])
